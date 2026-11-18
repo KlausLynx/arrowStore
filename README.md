@@ -1,91 +1,74 @@
-# React + TypeScript + Vite
+# Student Store
 
-This template provides a minimal setup to get React working in Vite with HMR and some ESLint rules.
-
-Currently, two official plugins are available:
-
-- [@vitejs/plugin-react](https://github.com/vitejs/vite-plugin-react/blob/main/packages/plugin-react) uses [Oxc](https://oxc.rs)
-- [@vitejs/plugin-react-swc](https://github.com/vitejs/vite-plugin-react/blob/main/packages/plugin-react-swc) uses [SWC](https://swc.rs/)
-
-## React Compiler
-
-The React Compiler is not enabled on this template because of its impact on dev & build performances. To add it, see [this documentation](https://react.dev/learn/react-compiler/installation).
-
-## Expanding the ESLint configuration
-
-If you are developing a production application, we recommend updating the configuration to enable type-aware lint rules:
-
-```js
-export default defineConfig([
-  globalIgnores(['dist']),
-  {
-    files: ['**/*.{ts,tsx}'],
-    extends: [
-      // Other configs...
-
-      // Remove tseslint.configs.recommended and replace with this
-      tseslint.configs.recommendedTypeChecked,
-      // Alternatively, use this for stricter rules
-      tseslint.configs.strictTypeChecked,
-      // Optionally, add this for stylistic rules
-      tseslint.configs.stylisticTypeChecked,
-
-      // Other configs...
-    ],
-    languageOptions: {
-      parserOptions: {
-        project: ['./tsconfig.node.json', './tsconfig.app.json'],
-        tsconfigRootDir: import.meta.dirname,
-      },
-      // other options...
-    },
-  },
-])
-
-```
-
-You can also install [eslint-plugin-react-x](https://npmx.dev/package/eslint-plugin-react-x) and [eslint-plugin-react-dom](https://npmx.dev/package/eslint-plugin-react-dom) for React-specific lint rules:
-
-```js
-// eslint.config.js
-import reactX from 'eslint-plugin-react-x'
-import reactDom from 'eslint-plugin-react-dom'
-
-export default defineConfig([
-  globalIgnores(['dist']),
-  {
-    files: ['**/*.{ts,tsx}'],
-    extends: [
-      // Other configs...
-      // Enable lint rules for React
-      reactX.configs['recommended-typescript'],
-      // Enable lint rules for React DOM
-      reactDom.configs.recommended,
-    ],
-    languageOptions: {
-      parserOptions: {
-        project: ['./tsconfig.node.json', './tsconfig.app.json'],
-        tsconfigRootDir: import.meta.dirname,
-      },
-      // other options...
-    },
-  },
-])
-
-```
+A responsive e-commerce storefront for students to browse and buy affordable products.
+Built for the Arrowstack Frontend Development internship (Project 1).
 
 ## Target User
 
 A student using a phone who wants to easily browse and buy affordable products.
 
-## Goals
+## Features
 
-- Browse products and see prices clearly
-- Filter by category and price
-- Add items to a cart and check out with a simple form
+- Responsive product grid (2, 3 or 4 columns by screen size)
+- Category filters and search
+- Cart with quantity controls, stock limits and total
+- Checkout form with client-side validation
+- Loading, empty, error and success states
+- Keyboard navigation, skip link, labelled forms and ARIA messages
 
-## Success Measures
+## Tech Stack
 
-- Works well on phone and laptop
-- Usable with only the keyboard
-- Shows loading, empty, error and success states
+React, TypeScript, Vite, Tailwind CSS
+
+## Run It
+
+​```bash
+npm install
+npm run dev
+​```
+Open the link Vite prints. Add `?fail` to the URL to see the error state.
+
+## Project Structure
+
+- `src/types` : Product, Category and CartItem types
+- `src/data` : mock products and fake API
+- `src/components` : ProductCard, Cart, Checkout
+
+## Testing and Validation
+
+- Keyboard-only test: all items passed (see checklist)
+- Lighthouse (mobile): Accessibility __/ Performance__ (report in `docs/`)
+- Tested screen widths: phone, tablet, laptop
+- Tested edge cases: empty cart, empty search, invalid form, stock limit, failed load
+
+## Decisions
+
+- Separate `Product` (shop data) from `CartItem` (shopper choice)
+- Mock API behind one function, so a real API can replace it
+- Typed `Category` to catch typos at compile time
+
+## Limitations and Next Steps
+
+- Uses mock data and a fake server, not a real API
+- Cart is lost on refresh (next: save to localStorage)
+- No real payment or user accounts
+- Next: product detail page, sorting, real backend
+
+## Screenshots
+
+![Phone view](docs/phone.png)
+![Tablet view](docs/tablet.png)
+![Laptop view](docs/laptop.png)
+
+## Test Reports
+
+- [Lighthouse mobile report](docs/lighthouse-mobile.html)
+- [Lighthouse desktop report](docs/lighthouse-desktop.html)
+
+- Lighthouse (production build, incognito):
+- Mobile: Performance 97 / Accessibility 100 / Best Practices 100 / SEO 100
+- Desktop: Performance 100 / Accessibility 100 / Best Practices 100 / SEO 100
+- Reports in `docs/`
+- An earlier dev-server run scored Performance 36 (extensions on, unminified code), so it was not a fair test.
+- SEO was 92 until `public/robots.txt` was added.
+- Known: about 35 KiB of unused JavaScript. Next: lazy-load the checkout form.

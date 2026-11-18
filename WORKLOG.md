@@ -12,3 +12,13 @@
 - - **Nov 14:** Added category filter buttons with useState and filter().
 - **Nov 14:** Added cart state and Add to cart button with a live item count.
 - **Nov 14:** Added stock limit, Cart component (+/−/remove/total), search, and empty states
+
+### Nov 18
+
+- **Nov 18:** Added fake API with loading and error states, retry button.
+- **Nov 18:** Built checkout form with client-side validation and success message.
+- **Nov 18:** Designed UI: sticky header, hero search, pill filters, new product cards with stock badges, sidebar cart, skeleton loading.
+- **Nov 18:** Added focus ring, skip link, page title, image sizing and lazy loading.
+- **Nov 18:** Ran keyboard-only test and Lighthouse audit. Saved report in docs/.
+- **Nov 18:** Wrote full README with decisions, limitations and next steps.
+- **Nov 18:** Saved final Lighthouse reports and screenshots in docs/. Linked them in README.
